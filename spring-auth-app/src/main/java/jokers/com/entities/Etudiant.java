@@ -35,8 +35,10 @@ public class Etudiant implements Serializable{
 	private String lieuNaissanceEtudiant;
 	private String adresseEtudiant;
 	private double numeroEtudiant;
+	private String sexeEtudiant;
 	@Email(message="Votre email est obligatoire")
 	private String emailEtudiant;
+	private int telephoneEtudiant;
 	private String photoEtudiant;
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="ID_CLASSE")
@@ -49,7 +51,7 @@ public class Etudiant implements Serializable{
 	}
 	
 	public Etudiant(String matriculeEtudiant, String nomEtudiant, String prenomEtudiant, Date dateNaissanceEtudiant,
-			String lieuNaissanceEtudiant, String adresseEtudiant, double numeroEtudiant, String emailEtudiant,
+			String lieuNaissanceEtudiant, String adresseEtudiant, double numeroEtudiant,String sexeEtudiant, String emailEtudiant, int telephoneEtudiant,
 			String photoEtudiant, Classe classe) {
 		super();
 		this.matriculeEtudiant = matriculeEtudiant;
@@ -59,7 +61,9 @@ public class Etudiant implements Serializable{
 		this.lieuNaissanceEtudiant = lieuNaissanceEtudiant;
 		this.adresseEtudiant = adresseEtudiant;
 		this.numeroEtudiant = numeroEtudiant;
+		this.sexeEtudiant = sexeEtudiant;
 		this.emailEtudiant = emailEtudiant;
+		this.telephoneEtudiant = telephoneEtudiant;
 		this.photoEtudiant = photoEtudiant;
 		this.classe = classe;
 	}
@@ -145,16 +149,31 @@ public class Etudiant implements Serializable{
 	public void setNotes(Collection<Note> notes) {
 		this.notes = notes;
 	}
+	
+	public int getTelephoneEtudiant() {
+		return telephoneEtudiant;
+	}
+
+	public void setTelephoneEtudiant(int telephoneEtudiant) {
+		this.telephoneEtudiant = telephoneEtudiant;
+	}
+	
+	public String getSexeEtudiant() {
+		return sexeEtudiant;
+	}
+
+	public void setSexeEtudiant(String sexeEtudiant) {
+		this.sexeEtudiant = sexeEtudiant;
+	}
 
 	@Override
 	public String toString() {
 		return "Etudiant [matriculeEtudiant=" + matriculeEtudiant + ", nomEtudiant=" + nomEtudiant + ", prenomEtudiant="
 				+ prenomEtudiant + ", dateNaissanceEtudiant=" + dateNaissanceEtudiant + ", lieuNaissanceEtudiant="
 				+ lieuNaissanceEtudiant + ", adresseEtudiant=" + adresseEtudiant + ", numeroEtudiant=" + numeroEtudiant
-				+ ", emailEtudiant=" + emailEtudiant + ", photoEtudiant=" + photoEtudiant + ", classe=" + classe
-				+ ", notes=" + notes + "]";
+				+ ", sexeEtudiant=" + sexeEtudiant + ", emailEtudiant=" + emailEtudiant + ", telephoneEtudiant="
+				+ telephoneEtudiant + ", photoEtudiant=" + photoEtudiant + ", classe=" + classe + ", notes=" + notes
+				+ "]";
 	}
-
-
 
 }

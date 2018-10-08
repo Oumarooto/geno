@@ -2,11 +2,16 @@ package jokers.com.web;
 
 import java.net.URI;
 import java.util.Optional;
+import java.util.concurrent.LinkedTransferQueue;
 
 import javax.validation.Valid;
 
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.hateoas.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +26,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import jokers.com.entities.Etudiant;
 import jokers.com.error.StudentNotFoundException;
 import jokers.com.service.IEtudiantImpl;
+import net.bytebuddy.implementation.MethodDelegation;
 
 @RestController
 public class EtudiantController {
@@ -53,6 +59,16 @@ public class EtudiantController {
 	}
 	
 	
+	
+	//Code to retrieve all Student
+		@GetMapping(path="/students/")
+		public Page<Etudiant> retrieveAllStudents(
+				@RequestParam(name="page", defaultValue="0")int p, 
+				@RequestParam(name="size", defaultValue="5")int s){
+			return etudiantImpl.getAll(p, s);
+		}
+	
+	
 	//Code to retrieve One Student
 	@GetMapping(path="/students/{matricule}")
 	public Etudiant retrieveStudent(@PathVariable String matricule) {
@@ -61,22 +77,26 @@ public class EtudiantController {
 		if(!student.isPresent()) {
 			throw new StudentNotFoundException("Matricule-"+matricule);
 		}
+		 
+		//Resource<Etudiant> resource = new Resource<Etudiant>(student);
+		
+		//ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllStudents());
+		
+		
 		return student.get();
 	}
 	
+	private EtudiantController methodOn(Class<? extends EtudiantController> class1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	//Code to Delete One Student
 	@DeleteMapping(path="/students/{matricule}")
 	public boolean deleteStudent(@PathVariable String matricule) {
 		return etudiantImpl.delete(matricule);
 	}
 
-	//Code to retrieve all Student
-	@GetMapping(path="/students/")
-	public Page<Etudiant> retrieveAllStudents(
-			@RequestParam(name="page", defaultValue="0")int p, 
-			@RequestParam(name="size", defaultValue="5")int s){
-		return etudiantImpl.getAll(p, s);
-	}
-	
 	
 }

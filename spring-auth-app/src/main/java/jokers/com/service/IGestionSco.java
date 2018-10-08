@@ -16,5 +16,6 @@ public interface IGestionSco<T,U,V> {
 	public boolean update(T g, U mtricle);
 	public boolean delete(U mtricle);
 	public Page<T> getAlls(Integer p, Integer s);
+	//public Etudiant findByKeyword(String keyword);
 
 }

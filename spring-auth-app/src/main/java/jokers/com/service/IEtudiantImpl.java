@@ -74,7 +74,6 @@ public class IEtudiantImpl implements IGestionSco<Etudiant, String, Integer> {
 	public Page<Etudiant> getAlls(Integer p, Integer s) {
 		return null;
 	}
-
 	
 
 }

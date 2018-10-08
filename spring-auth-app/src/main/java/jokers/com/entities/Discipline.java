@@ -27,6 +27,7 @@ public class Discipline implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idDiscipline;
 	private String intituleDiscipline;
+	private String codeDiscipline;
 	private Integer coefDiscipline;
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ID_MODULE")
@@ -45,11 +46,12 @@ public class Discipline implements Serializable{
 		super();
 	}
 
-	public Discipline( String intituleDiscipline, Integer coefDisciplince, Module module,
+	public Discipline( String intituleDiscipline, Integer coefDisciplince, String codeDiscipline,Module module,
 			Semestre semestre) {
 		super();
 		this.intituleDiscipline = intituleDiscipline;
 		this.coefDiscipline = coefDisciplince;
+		this.codeDiscipline =  codeDiscipline;
 		this.module = module;
 		this.semestre = semestre;
 	}
@@ -140,6 +142,16 @@ public class Discipline implements Serializable{
 
 	public void setEnseignants(Collection<Enseignant> enseignants) {
 		this.enseignants = enseignants;
+	}
+	
+	
+
+	public String getCodeDiscipline() {
+		return codeDiscipline;
+	}
+
+	public void setCodeDiscipline(String codeDiscipline) {
+		this.codeDiscipline = codeDiscipline;
 	}
 
 	@Override

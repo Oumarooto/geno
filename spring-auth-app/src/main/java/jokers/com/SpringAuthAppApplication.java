@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.format.datetime.joda.LocalDateTimeParser;
 
 import jokers.com.entities.AnneeScolaire;
 import jokers.com.entities.Classe;
@@ -19,6 +18,7 @@ import jokers.com.entities.Note;
 import jokers.com.entities.Semestre;
 import jokers.com.level.IntituleSemestre;
 import jokers.com.level.NiveauClasse;
+import jokers.com.level.SexeEtudiant;
 import jokers.com.service.IAnneeScolaireImpl;
 import jokers.com.service.IClasseImpl;
 import jokers.com.service.IDisciplineImpl;
@@ -78,6 +78,9 @@ public class SpringAuthAppApplication implements CommandLineRunner {
 		String semestre9 = IntituleSemestre.SEMESTRE_NEUF.getSemestre();
 		String semestre10 = IntituleSemestre.SEMESTRE_DIX.getSemestre();
 		
+		String m = SexeEtudiant.MALE.getSexe();
+		String f = SexeEtudiant.FEMALE.getSexe();
+		
 		Classe c1 = classeImpl.save(new Classe("Genie Telecommunication Informatique", levelClasse1, as2018));
 		Classe c2 = classeImpl.save(new Classe("Genie Telecommunication Informatique", levelClasse2, as2018));
 		Classe c3 = classeImpl.save(new Classe("Genie Telecommunication Informatique", levelClasse3, as2018));
@@ -101,16 +104,18 @@ public class SpringAuthAppApplication implements CommandLineRunner {
 		Module m2 = moduleImpl.save(new Module("INFO539", "Systemes distribues 2", c1));
 		Module m3 = moduleImpl.save(new Module("INFO5310","Reseaux et securite", c1));
 		
-		Discipline d1 = disciplineImpl.save(new Discipline("Reseaux Mobile", 2, m1, s1));
-		Discipline d2 = disciplineImpl.save(new Discipline("Application Mobile", 2, m1, s1));
-		Discipline d3 = disciplineImpl.save(new Discipline("Programmation concurrente et parallele", 2, m2, s1));
-		Discipline d4 = disciplineImpl.save(new Discipline("Applications distribuees ", 2, m2, s1));
-		Discipline d5 = disciplineImpl.save(new Discipline("Technologies emergentes ", 2, m2, s1));
+		Discipline d1 = disciplineImpl.save(new Discipline("Reseaux Mobile", 2, "RMS1M1", m1, s1));
+		Discipline d6 = disciplineImpl.save(new Discipline("Reseaux Mobile", 2, "AMS1M1", m1, s1));
+		Discipline d2 = disciplineImpl.save(new Discipline("Application Mobile", 2, "RMS1M1", m1, s1));
+		Discipline d3 = disciplineImpl.save(new Discipline("Programmation concurrente et parallele", 2,"PCPS1M2", m2, s1));
+		Discipline d4 = disciplineImpl.save(new Discipline("Applications distribuees ", 2,"ADS1M2", m2, s1));
+		Discipline d5 = disciplineImpl.save(new Discipline("Technologies emergentes ", 2,"TES1M2", m2, s1));
 		
 				
-		Etudiant etd1 = etudiantImpl.save(new Etudiant("KEOU20182003", "KEITA", "Oumar", new Date(), "MPessoba", "Missira", 123456789, "keimar.ok@gmail.com","Oumar.jpg", c1));
-		Etudiant etd2 = etudiantImpl.save(new Etudiant("KEOU20182004", "TRAORE", "Lassana", new Date(), "Bamako", "Banconi Sourakabougou", 987654321, "lassa09.lt@gmail.com","lassana.jpg",c1));
-		Etudiant etd3 = etudiantImpl.save(new Etudiant("KEOU20182005", "COULIBALY", "Daouda", new Date(), "Yamoussokoro", "Sankareboubou", 654321789, "daoudi.dc@gmail.com","Daouda.jpg",c2));
+		Etudiant etd1 = etudiantImpl.save(new Etudiant("CODA0710890800", "COULIBALY", "Daouda", new Date(), "KONZANSSO", "Sankareboubou", 654321789, m, "daoudi.dc@gmail.com", 78956852, "Daouda.jpg",c2));
+		Etudiant etd2 = etudiantImpl.save(new Etudiant("KEOU0710910800", "KEITA", "Oumar", new Date(), "MPessoba", "Missira", 65699438, m, "keimar.ok@gmail.com", 72367980, "Oumar.jpg",c1));
+		Etudiant etd3 = etudiantImpl.save(new Etudiant("TRLA2508891800", "TRAORE", "Lassana", new Date(), "Bamako", "Banconi", 123456789, m, "lassa09@gmail.com", 73315624, "Lassana.jpg",c1));
+		Etudiant etd4 = etudiantImpl.save(new Etudiant("DEFA0710950800", "DEMBELE", "Fatoumata Mama", new Date(), "Koutiala", "Sincina", 987654321, f, "fatoumata.fmd@gmail.com", 89653214, "fatoumata.jpg",c2));
 		
 		Note note11 = noteImpl.save(new Note(15, 13, 10, 5, d1, etd1));
 		Note note12 = noteImpl.save(new Note(12, 16, 13, 3, d2, etd1));
